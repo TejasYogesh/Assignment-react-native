@@ -13,6 +13,7 @@
     "expo-env.d.ts",
     "components/Card.jsx",
     "app/(tabs)/Settings.jsx",
-    "app/(tabs)/AddTask.jsx"
+    "app/(tabs)/AddTask.jsx",
+    "app/(tabs)/Calendar.jsx"
   ]
 }

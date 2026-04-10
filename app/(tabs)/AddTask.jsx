@@ -1,8 +1,10 @@
 import { addTask } from "@/services/taskService";
 import { Ionicons } from '@expo/vector-icons';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import { useState } from 'react';
 import {
   Alert,
+  Platform,
   ScrollView,
   StyleSheet,
   Text,
@@ -10,49 +12,52 @@ import {
   ToastAndroid,
   TouchableOpacity,
   View,
-} from "react-native";
+} from 'react-native';
+
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const PURPLE = '#6C63FF';
 const PURPLE_LIGHT = '#EEECff';
- 
- 
+
+
 
 export default function AddTask() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [dueDate, setDueDate] = useState('');
-  const [section, setSection] = useState('Today');
+  const [section, setSection] = useState('Today');;
+  const [date, setDate] = useState(new Date());
+  const [showPicker, setShowPicker] = useState(false);
 
- 
+
   const handleAdd = async () => {
-  if (!title.trim()) {
-    ToastAndroid.show("Please enter title", ToastAndroid.SHORT);
-    return;
-  }
+    if (!title.trim()) {
+      ToastAndroid.show("Please enter title", ToastAndroid.SHORT);
+      return;
+    }
 
-  try {
-    await addTask({
-      title,
-      description,
-      section,
-      dueDate,
-      tags: [], // or your selectedTags later
-    });
+    try {
+      await addTask({
+        title,
+        description,
+        section,
+        dueDate,
+        tags: [], // or your selectedTags later
+      });
 
-    ToastAndroid.show("Task added!", ToastAndroid.SHORT);
+      ToastAndroid.show("Task added!", ToastAndroid.SHORT);
 
-    // Reset form
-    setTitle("");
-    setDescription("");
-    setDueDate("");
-    setSection("Today");
+      // Reset form
+      setTitle("");
+      setDescription("");
+      setDueDate("");
+      setSection("Today");
 
-  } catch (error) {
-    console.log(error);
-    Alert.alert("Error", "Failed to add task");
-  }
-};
+    } catch (error) {
+      console.log(error);
+      Alert.alert("Error", "Failed to add task");
+    }
+  };
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -136,21 +141,36 @@ export default function AddTask() {
         </View>
 
         {/* Tags */}
-      
+
 
         {/* Due date */}
         <View style={styles.field}>
           <Text style={styles.fieldLabel}>Due Date</Text>
-          <View style={styles.dateRow}>
+
+          <TouchableOpacity
+            style={styles.dateRow}
+            onPress={() => setShowPicker(true)}
+          >
             <Ionicons name="calendar-outline" size={16} color={PURPLE} />
-            <TextInput
-              style={styles.dateInput}
-              placeholder="e.g. 1 May"
-              placeholderTextColor="#C0C0C0"
-              value={dueDate}
-              onChangeText={setDueDate}
+            <Text style={styles.dateText}>
+              {date ? date.toDateString() : "Select date"}
+            </Text>
+          </TouchableOpacity>
+
+          {showPicker && (
+            <DateTimePicker
+              value={date}
+              mode="date"
+              display={Platform.OS === "ios" ? "spinner" : "default"}
+              onChange={(event, selectedDate) => {
+                setShowPicker(false);
+                if (selectedDate) {
+                  setDate(selectedDate);
+                  setDueDate(selectedDate.toDateString()); // store in your state
+                }
+              }}
             />
-          </View>
+          )}
         </View>
 
         {/* Submit */}
@@ -365,4 +385,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '700',
   },
+  dateText: {
+  marginLeft: 10,
+  fontSize: 14,
+  color: '#1A1A2E',
+},
 });
