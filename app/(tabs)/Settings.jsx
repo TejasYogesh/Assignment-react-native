@@ -43,7 +43,7 @@ export default function Settings() {
               await auth.signOut();
               router.replace('/');
             } catch (error) {
-              Alert.alert('Error', 'Failed to log out. Please try again.');
+              Alert.alert('Error', 'Failed to log out. Please try again.', error);
             }
           },
         },
@@ -51,7 +51,7 @@ export default function Settings() {
     );
   };
 
- 
+
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.content}>
@@ -61,8 +61,32 @@ export default function Settings() {
       </View>
 
       {/* Profile Card */}
-    
+      <View style={styles.profileCard}>
+        <View style={styles.avatar}>
+          <Text style={styles.avatarText}>
+            {user?.email?.[0]?.toUpperCase() || "U"}
+          </Text>
+        </View>
 
+        <View style={styles.profileInfo}>
+          <Text style={styles.profileName}>
+            {user?.displayName || "User"}
+          </Text>
+
+          <Text style={styles.profileEmail}>
+            {user?.email || "No email"}
+          </Text>
+        </View>
+
+        <View style={styles.profileBadge}>
+          <Text style={styles.profileBadgeText}>PRO</Text>
+        </View>
+      </View>
+      {/* Logout Button */}
+      <TouchableOpacity style={styles.logoutButton} onPress={handleLogout} activeOpacity={0.85}>
+        <Ionicons name="log-out-outline" size={20} color="#FF4D4D" />
+        <Text style={styles.logoutText}>Log Out</Text>
+      </TouchableOpacity>
       {/* Preferences Section */}
       <SectionLabel title="Preferences" />
 
@@ -102,21 +126,21 @@ export default function Settings() {
           icon="person-outline"
           label="Edit Profile"
           right={<Ionicons name="chevron-forward" size={18} color="#C0C0C0" />}
-          onPress={() => {}}
+          onPress={() => { }}
         />
         <Divider />
         <SettingRow
           icon="lock-closed-outline"
           label="Change Password"
           right={<Ionicons name="chevron-forward" size={18} color="#C0C0C0" />}
-          onPress={() => {}}
+          onPress={() => { }}
         />
         <Divider />
         <SettingRow
           icon="shield-checkmark-outline"
           label="Privacy Policy"
           right={<Ionicons name="chevron-forward" size={18} color="#C0C0C0" />}
-          onPress={() => {}}
+          onPress={() => { }}
         />
       </View>
 
@@ -128,22 +152,18 @@ export default function Settings() {
           icon="help-circle-outline"
           label="Help & FAQ"
           right={<Ionicons name="chevron-forward" size={18} color="#C0C0C0" />}
-          onPress={() => {}}
+          onPress={() => { }}
         />
         <Divider />
         <SettingRow
           icon="star-outline"
           label="Rate the App"
           right={<Ionicons name="chevron-forward" size={18} color="#C0C0C0" />}
-          onPress={() => {}}
+          onPress={() => { }}
         />
       </View>
 
-      {/* Logout Button */}
-      <TouchableOpacity style={styles.logoutButton} onPress={handleLogout} activeOpacity={0.85}>
-        <Ionicons name="log-out-outline" size={20} color="#FF4D4D" />
-        <Text style={styles.logoutText}>Log Out</Text>
-      </TouchableOpacity>
+
 
       <Text style={styles.versionText}>Version 1.0.0</Text>
     </ScrollView>
@@ -317,6 +337,7 @@ const styles = StyleSheet.create({
   // Logout
   logoutButton: {
     marginHorizontal: 20,
+    marginVertical:10,
     marginTop: 8,
     backgroundColor: '#FFF0F0',
     borderRadius: 16,
