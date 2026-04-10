@@ -1,14 +1,24 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native';
 
-const Calendar = () => {
+export default function Calendar() {
   return (
-    <View>
-      <Text>Calendar</Text>
+    <View style={styles.container}>
+      <Text style={styles.text}>📅 Calendar Screen</Text>
+      <Text>Upcoming tasks will be shown here</Text>
     </View>
-  )
+  );
 }
 
-export default Calendar
-
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#fff',
+  },
+  text: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+});

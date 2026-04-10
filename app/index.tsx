@@ -3,7 +3,7 @@ import { Text, TouchableOpacity, View } from "react-native";
 
 export default function Index() {
   const route = useRouter();
-  const differentPage = () =>{
+  const differentPage = () => {
     route.replace('/AddTask')
   }
   return (
@@ -14,10 +14,11 @@ export default function Index() {
         alignItems: "center",
       }}
     >
+      
       <Text>
         <TouchableOpacity onPress={differentPage}>
           <Text>
-           Click
+            Click
           </Text>
         </TouchableOpacity>
       </Text>
