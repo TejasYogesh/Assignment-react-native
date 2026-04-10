@@ -1,13 +1,14 @@
+import { Ionicons } from "@expo/vector-icons";
 import { useNavigation, useRouter } from "expo-router";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useEffect, useState } from "react";
 import {
-    StyleSheet,
-    Text,
-    TextInput,
-    ToastAndroid,
-    TouchableOpacity,
-    View,
+  StyleSheet,
+  Text,
+  TextInput,
+  ToastAndroid,
+  TouchableOpacity,
+  View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "react-native-web";
@@ -19,6 +20,7 @@ export default function Signin() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [secure, setSecure] = useState(true);
 
   const signIn = () => {
     if (!email && !password) {
@@ -61,13 +63,23 @@ export default function Signin() {
 
         {/* Password */}
         <Text style={styles.label}>Password</Text>
-        <TextInput
-          placeholder="Enter Password"
-          secureTextEntry
-          value={password}
-          onChangeText={setPassword}
-          style={styles.input}
-        />
+        <View style={styles.passwordContainer}>
+          <TextInput
+            placeholder="Enter Password"
+            value={password}
+            onChangeText={setPassword}
+            style={styles.passwordInput}
+            secureTextEntry={secure}
+          />
+
+          <TouchableOpacity onPress={() => setSecure(!secure)}>
+            <Ionicons
+              name={secure ? "eye-off-outline" : "eye-outline"}
+              size={22}
+              color="#777"
+            />
+          </TouchableOpacity>
+        </View>
 
         {/* Sign In Button */}
         <TouchableOpacity style={styles.signinBtn} onPress={signIn}>
@@ -146,5 +158,21 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     fontSize: 16,
     color: "#333",
+  },
+  passwordContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#ddd",
+    borderRadius: 14,
+    color: "black",
+    paddingHorizontal: 14,
+  },
+
+  passwordInput: {
+    flex: 1,
+    paddingVertical: 14,
+    fontSize: 16,
+    color: "black",
   },
 });

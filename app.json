@@ -19,7 +19,8 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.tejas.taskmanager"
     },
     "web": {
       "output": "static",
@@ -44,6 +45,19 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "47939d04-7910-4209-a034-415654e2e15c"
+      }
+    },
+    "owner": "tejasisaverygoodboy",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/47939d04-7910-4209-a034-415654e2e15c"
     }
   }
 }
