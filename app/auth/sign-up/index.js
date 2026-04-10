@@ -27,15 +27,11 @@ export default function SignUp() {
       return;
     }
     createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(user);
-        router.replace("/(tabs)/AddTask");
+      .then(() => {
+        router.replace("/"); // ✅ let index.tsx handle the redirect
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
+        ToastAndroid.show("Invalid credentials", ToastAndroid.BOTTOM);
       });
   };
 

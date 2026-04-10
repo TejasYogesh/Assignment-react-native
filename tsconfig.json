@@ -11,6 +11,8 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
-    "components/Card.jsx"
+    "components/Card.jsx",
+    "app/(tabs)/Settings.jsx",
+    "app/(tabs)/AddTask.jsx"
   ]
 }

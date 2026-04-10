@@ -27,20 +27,11 @@ export default function Signin() {
     }
 
     signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        console.log(user);
-        router.replace("/(tabs)/AddTrip");
-        // ...
+      .then(() => {
+        router.replace("/"); // go to index, it will redirect automatically
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // console.log(errorCode, errorMessage);
-        if (errorCode || errorMessage === "(auth/invalid-credential)") {
-          ToastAndroid.show("Invalid credentials", ToastAndroid.BOTTOM);
-        }
+        ToastAndroid.show("Invalid credentials", ToastAndroid.BOTTOM);
       });
   };
 
@@ -48,7 +39,7 @@ export default function Signin() {
     navigation.setOptions({
       headerShown: false,
     });
-  }, []);
+  }, [navigation]);
 
   return (
     <SafeAreaView style={styles.container}>
