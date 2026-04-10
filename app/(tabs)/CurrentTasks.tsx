@@ -8,6 +8,7 @@ const dummyTasks = [
 ];
 
 export default function CurrentTasks() {
+
     return (
         <SafeAreaView style={styles.container}>
             <View>

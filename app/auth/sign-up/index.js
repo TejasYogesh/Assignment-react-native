@@ -30,7 +30,7 @@ export default function SignUp() {
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
-        router.replace("/(tabs)/mytrip");
+        router.replace("/(tabs)/AddTask");
       })
       .catch((error) => {
         const errorCode = error.code;
