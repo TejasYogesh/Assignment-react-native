@@ -1,13 +1,16 @@
+import { addTask } from "@/services/taskService";
 import { Ionicons } from '@expo/vector-icons';
 import { useState } from 'react';
 import {
+  Alert,
   ScrollView,
   StyleSheet,
   Text,
   TextInput,
+  ToastAndroid,
   TouchableOpacity,
   View,
-} from 'react-native';
+} from "react-native";
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const PURPLE = '#6C63FF';
@@ -22,13 +25,34 @@ export default function AddTask() {
   const [section, setSection] = useState('Today');
 
  
-  const handleAdd = () => {
-    if (!title.trim()) return;
-    // TODO: save to Firebase / state
-    setTitle('');
-    setDescription('');
-    setDueDate('');
-  };
+  const handleAdd = async () => {
+  if (!title.trim()) {
+    ToastAndroid.show("Please enter title", ToastAndroid.SHORT);
+    return;
+  }
+
+  try {
+    await addTask({
+      title,
+      description,
+      section,
+      dueDate,
+      tags: [], // or your selectedTags later
+    });
+
+    ToastAndroid.show("Task added!", ToastAndroid.SHORT);
+
+    // Reset form
+    setTitle("");
+    setDescription("");
+    setDueDate("");
+    setSection("Today");
+
+  } catch (error) {
+    console.log(error);
+    Alert.alert("Error", "Failed to add task");
+  }
+};
 
   return (
     <SafeAreaView style={styles.safeArea}>
