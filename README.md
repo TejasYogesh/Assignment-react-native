@@ -1,50 +1,107 @@
-# Welcome to your Expo app 👋
+# 📱 Task Management App (React Native)
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A modern and intuitive **Task Management App** built using **React Native (Expo)** and **Firebase**, designed for gig workers to efficiently manage their daily tasks.
 
-## Get started
+---
 
-1. Install dependencies
+## 🚀 Features
 
-   ```bash
-   npm install
-   ```
+### 🔐 User Authentication
 
-2. Start the app
+- Firebase Email/Password Authentication
+- Login & Registration
+- Persistent login session
+- Error handling for invalid credentials
 
-   ```bash
-   npx expo start
-   ```
+---
 
-In the output, you'll find options to open the app in a
+### 📝 Task Management
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- Create, edit, delete tasks
+- Mark tasks as complete/incomplete
+- Each task includes:
+  - Title
+  - Description
+  - Due Date
+  - Priority (Low, Medium, High)
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+---
 
-## Get a fresh project
+### 🔍 Task Filtering & Search
 
-When you're ready, run:
+- Filter tasks by:
+  - Priority
+  - Status (Completed / Incomplete)
+- Search tasks by title
+- Tasks grouped by:
+  - Today
+  - Tomorrow
+  - This Week
+
+---
+
+### 📅 Calendar View
+
+- Monthly calendar view
+- Highlights dates with tasks
+- Click on a date to view tasks for that day
+
+---
+
+### ⚡ Real-Time Updates
+
+- Uses Firebase Firestore `onSnapshot`
+- Instant UI updates without refresh
+
+---
+
+### 🎨 UI/UX
+
+- Clean and modern design (Material-inspired)
+- Responsive across Android & iOS
+- Smooth onboarding screens with swipe gestures
+- Custom components and animations
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend:** React Native (Expo)
+- **Backend:** Firebase
+  - Authentication
+  - Firestore Database
+- **State Management:** React Hooks
+- **Navigation:** Expo Router
+- **Gestures:** React Native Gesture Handler
+
+---
+
+## 📂 Project Structure
+
+app/
+(tabs)/
+AddTask.tsx
+CurrentTasks.tsx
+Calendar.tsx
+\_layout.tsx
+
+auth/
+sign-in/
+sign-up/
+
+configs/
+firebaseConfig.ts
+
+services/
+taskService.ts
+
+---
+
+## ⚙️ Setup Instructions
+
+### 1️⃣ Clone the repository
 
 ```bash
-npm run reset-project
+git clone https://github.com/your-username/task-manager-app.git
+cd task-manager-app
 ```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
