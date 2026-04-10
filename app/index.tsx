@@ -1,6 +1,11 @@
-import { Text, View } from "react-native";
+import { useRouter } from "expo-router";
+import { Text, TouchableOpacity, View } from "react-native";
 
 export default function Index() {
+  const route = useRouter();
+  const differentPage = () =>{
+    route.replace('/AddTask')
+  }
   return (
     <View
       style={{
@@ -9,7 +14,13 @@ export default function Index() {
         alignItems: "center",
       }}
     >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
+      <Text>
+        <TouchableOpacity onPress={differentPage}>
+          <Text>
+           Click
+          </Text>
+        </TouchableOpacity>
+      </Text>
     </View>
   );
 }
